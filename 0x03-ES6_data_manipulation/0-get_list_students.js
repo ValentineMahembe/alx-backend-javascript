@@ -5,5 +5,3 @@ function getListStudents() {
     { is: 5, firstname: 'Serena', location: 'San Francisco' },
   ];
 }
-
-export default getListStudents;
