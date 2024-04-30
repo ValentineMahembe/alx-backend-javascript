@@ -1,26 +1,12 @@
-// Using Process stdin
+process.stdout.write('Welcome to Holberton School, what is your name?\n');
 
-console.log('Welcome to Holberton School, what is your name?');
-
-let closed = false;
-
-function closeProgram() {
-  if (!closed) {
-    console.log('This important software is now closing');
-    closed = true;
-    process.exit(0);
-  }
-}
-
-process.stdin.on('data', (data) => {
-  const name = data.toString().trim();
-
-  if (name) {
-    console.log(`Your name is: ${name}`);
-    closeProgram();
+process.stdin.on('readable', () => {
+  const chunk = process.stdin.read();
+  if (chunk !== null) {
+    process.stdout.write(`Your name is: ${chunk}`);
   }
 });
 
-process.on('exit', () => {
-  closeProgram();
+process.stdin.on('end', () => {
+  process.stdout.write('This important software is now closing\n');
 });

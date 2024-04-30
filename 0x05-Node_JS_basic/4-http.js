@@ -1,18 +1,16 @@
-// A small HTTP server using Node's HTTP module
-
 const http = require('http');
 
-// Create an HTTP server
-const app = http.createServer((req, res) => {
-  // Set the response headers
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
+const hostname = 'localhost';
+const port = 1245;
 
-  // Send the response
-  res.end('Hello Holberton School!\n');
+const app = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Hello Holberton School!');
 });
 
-// Start the server and listen on port 1245
-app.listen(1245);
+app.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
 
-// Export the app variable
 module.exports = app;
