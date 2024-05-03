@@ -33,12 +33,15 @@ describe('Index page', function() {
   });
 
   it('should respond within a reasonable time frame', function(done) {
-    this.timeout(5000); // Increase timeout for this test
-    request.get('http://localhost:7865/', function(error, response) {
-      expect(response.elapsedTime).to.be.lessThan(3000); // Assuming response time should be less than 3 seconds
-      done();
-    });
+  const startTime = Date.now();
+  request.get('http://localhost:7865/', function(error, response) {
+    const endTime = Date.now();
+    const responseTime = endTime - startTime;
+    expect(responseTime).to.be.lessThan(3000); // Assuming response time should be less than 3 seconds
+    done();
   });
+});
+
 
   it('should return a non-empty response body', function(done) {
     request.get('http://localhost:7865/', function(error, response, body) {
